@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>VM</title>
+</head>
+<body>
+
+<div id="vm-app">
+    <input type="text" d-model="someStr">
+    <input type="text" d-model="child.someStr">
+    <input type="text" d-model="child.someStr">
+    <span d-model='child.someStr'></span>
+    <div d-model="someStr"></div>
+    <p d-class="btn" class="abc">
+        {{someStr}}
+        <span d-text="child.someStr"></span>
+    </p>
+    <p d-html="htmlStr"></p>
+    <button d-on:click="clickBtn">change model</button>
+</div>
+
+<script src="./js/observer.js"></script>
+<script src="./js/watcher.js"></script>
+<script src="./js/compile.js"></script>
+<script src="./js/vm.js"></script>
+<script>
+    var vm = new VM({
+        el: '#vm-app',
+        data: {
+            someStr: 'hello ',
+            btn: 'btn',
+            htmlStr: '<span style="color: #f00;">测试测试</span>',
+            child: {
+                someStr: 'World !'
+            }
+        },
+
+        methods: {
+            clickBtn: function(e) {
+                var randomStrArr = ['test1', 'test2', 'test3'];
+                this.child.someStr = randomStrArr[parseInt(Math.random() * 3)];
+            }
+        }
+    });
+
+    vm.$watch('someStr', function() {
+        console.log(arguments);
+    });
+</script>
+
+</body>
+</html>

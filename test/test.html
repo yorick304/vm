@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>DocumentFragment测试</title>
+</head>
+<body>
+<script type="text/javascript">
+       // var d1 = new Date();
+       // for(var i=0;i<1000;i++)
+       // {
+       //        var op=document.createElement("P");
+       //        var oText=document.createTextNode("test1");
+       //        op.appendChild(oText);
+       //        document.body.appendChild(op);
+       // }
+       // var d2 = new Date();
+       // document.write("方法一用时：" + (d2.getTime() - d1.getTime()) + "<br/>");
+       //---+-----
+       var d3 = new Date();
+       var oFrag=document.createDocumentFragment();
+       for(var i=0;i<1000;i++)
+       {
+              var op=document.createElement("P");
+              var oText=document.createTextNode("test2");
+              op.appendChild(oText);
+              oFrag.appendChild(op);
+       }
+       document.body.appendChild(oFrag);
+       //这段代码中
+       var d4 = new Date();
+       document.write("方法二用时：" + (d4.getTime() - d3.getTime()) + "<br/>");
+</script>
+</body>
+</html>
